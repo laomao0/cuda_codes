@@ -6,6 +6,7 @@
  */
 
 #include <stdio.h>
+#include "gpu_timer.h"
 
 
 typedef unsigned int u32;
@@ -250,8 +251,15 @@ int main() {
 
 	// radix_sort2<<<1, 1>>>(GPU_DATA, NUM_LIST, NUM_ELEM, GPU_SORT_TMP_1, 0);
 
+	// compute the time
+
+	struct GpuTimer T;
+	T.Start();
+
 	gpu_sort_array<<<1, 2>>>(GPU_DATA, NUM_LIST, NUM_ELEM);
 
+	T.Stop();
+	float t = T.Elapsed();
 
 	cudaMemcpy(DATA, GPU_DATA, ARRAY_SIZE_IN_BYTES, cudaMemcpyDeviceToHost);
 
@@ -272,6 +280,8 @@ int main() {
 	{
 		printf("%d ", RESULT[i]);
 	}
+
+	printf("\nTime %f (ms)", t);
 
 
 }
