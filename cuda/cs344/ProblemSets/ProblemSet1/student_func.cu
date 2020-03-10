@@ -78,7 +78,7 @@ void rbga_to_greyscale(const uchar4* const rgbaImage,
 
     float greyness = .299f * R + .587f * G + .114f * B;
 
-    greyImage[offset] = static_cast<unsigned char>(greyness); 
+    greyImage[offset] = static_cast<unsigned char>(greyness);  // float to uchar
 
   }
   
@@ -102,6 +102,7 @@ void your_rgba_to_greyscale(const uchar4 * const h_rgbaImage, uchar4 * const d_r
  
   rbga_to_greyscale<<<gridSize, blockSize>>>(d_rgbaImage, d_greyImage, numRows, numCols);
   
-  cudaDeviceSynchronize(); checkCudaErrors(cudaGetLastError());
+  cudaDeviceSynchronize(); 
+  checkCudaErrors(cudaGetLastError());
 
 }

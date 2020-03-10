@@ -18,18 +18,21 @@ void your_rgba_to_greyscale(const uchar4 * const h_rgbaImage,
 #include "HW1.cpp"
 
 int main(int argc, char **argv) {
-  uchar4        *h_rgbaImage, *d_rgbaImage; // color image R G B A
-  unsigned char *h_greyImage, *d_greyImage;
+  uchar4        *h_rgbaImage, *d_rgbaImage; // color image R G B A, each one is a byte (8-bits)
+  unsigned char *h_greyImage, *d_greyImage; // h_sth: something stored in the host
+                                            // d_sth: something stored in the device, i.e., the GPU
 
   std::string input_file;
   std::string output_file;
   std::string reference_file;
+
   double perPixelError = 0.0;
   double globalError   = 0.0;
   bool useEpsCheck = false;
 
   if DEBUG
     std::cout << "argc " << argc << std::endl;
+
   switch (argc)
   {
 	case 2:
@@ -65,13 +68,14 @@ int main(int argc, char **argv) {
   std::cout << "reference_file " << reference_file << std::endl;
 
   //load the image and give us our input and output pointers
+  // function in HW1.cpp
   preProcess(&h_rgbaImage, &h_greyImage, &d_rgbaImage, &d_greyImage, input_file);
 
   
 
   GpuTimer timer;
   timer.Start();
-  //call the students' code
+  //call the students' code,  function numRows() in HW1.cpp
   your_rgba_to_greyscale(h_rgbaImage, d_rgbaImage, d_greyImage, numRows(), numCols());
   timer.Stop();
   cudaDeviceSynchronize(); checkCudaErrors(cudaGetLastError());
