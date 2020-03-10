@@ -1,0 +1,21 @@
+my running evns:
+ubuntu: 16.04.12
+nvcc [nvcc -V]: 
+    9.0.176
+cuda [cat /usr/local/cuda/version.txt]: 
+    8.0.61 
+cudnn [cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2]: 
+    5.1.10
+gcc [gcc --version]:
+    5.4.0
+opencv [pkg-config --modversion opencv]:
+    2.4.9.1
+
+1. build the whole codes:
+    make student
+2. run the examples
+    ./HW1 cinque_terre_small.jpg
+3. check the results 
+    view HW1_reference.png; HW1_differenceImage.png; HW1_output.png
+4. clear results
+    make clean
