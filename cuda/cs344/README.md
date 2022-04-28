@@ -13,6 +13,9 @@ installation; you must build it with libstdc++ (instead of the default
 libc++) so that it will properly link against the nVidia CUDA dev kit. 
 [This entry in the Udacity discussion forums](http://forums.udacity.com/questions/100132476/cuda-55-opencv-247-os-x-maverick-it-doesnt-work) describes exactly how to build a compatible OpenCV.
 
+1. ubuntu 18.04, gpu 2080yti, check opencv version : pkg-config --modversion opencv
+   retunr 3.4.9
+
 * Step 2. You can now create 10.9-compatible makefiles, which will allow you to
 build and run your homework on your own machine:
 ```
